@@ -4,22 +4,23 @@ module.exports = function solveSudoku(matrix) {
 
   function playSudoku(zero) {
     isSolved = !zero;
-    if (isSolved) return matrix
+    if (isSolved) { return matrix; }
 
     for (var i = 0; i < numbers.length; i++) {
-      const number = numbers[i]
+      const number = numbers[i];
       if (checkRow(zero.col,matrix,number) && checkCol(zero.row,matrix,number) && checkRect(zero.row,zero.col,matrix,number)) {
-        matrix[zero.row][zero.col] = number
-        playSudoku(findZero(matrix))
-        if (isSolved) return
+        matrix[zero.row][zero.col] = number;
+        playSudoku(findZero(matrix));
+        if (isSolved) return;
       }
     }
-    matrix[zero.row][zero.col] = 0
+    matrix[zero.row][zero.col] = 0;
   }
 
-  return playSudoku(findZero(matrix))
-}
+  playSudoku(findZero(matrix));
 
+  return matrix;
+}
 
 function checkRow(col,initial,number) {
   for (i = 0; i < initial.length; i++) {
